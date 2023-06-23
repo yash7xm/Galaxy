@@ -172,3 +172,11 @@ iframe {
 .console {
     clear: left;
 }
+
+.header span {
+    cursor: pointer;
+}
+
+.fa-lightbulb:hover {
+color: yellow;
+}
