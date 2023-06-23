@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #b8c6db;
+            font-family: 'Poppins', sans-serif;
+            transform: scale(0.5) translateY(-50%);
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 1rem;
+            color: blue;
+        }
+
+        .card {
+            width: 600px;
+            background-color: white;
+            border-radius: 10px;
+            max-width: 100%;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .header {
+            padding: 3rem;
+        }
+
+        h2 {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul li {
+            font-size: 1.3rem;
+            margin: 1rem 0;
+        }
+
+        ul li label {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        ul li input {
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #8e44ad;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1.2rem;
+            padding: 1.3rem;
+        }
+
+        button:hover {
+            background-color: #732d91;
+        }
+
+        button:focus {
+            background-color: #732d91;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+        <h1>Quiz App</h1>
+        <div class="card">
+            <div class="header">
+                <h2 id="question">Question</h2>
+                <ul>
+                    <li><input type="radio" id="a" class="answer" name="answer"><label for="a" id="a-text">a</label>
+                    </li>
+                    <li><input type="radio" id="b" class="answer" name="answer"><label for="b" id="b-text">b</label>
+                    </li>
+                    <li><input type="radio" id="c" class="answer" name="answer"><label for="c" id="c-text">c</label>
+                    </li>
+                    <li><input type="radio" id="d" class="answer" name="answer"><label for="d" id="d-text">d</label>
+                    </li>
+                </ul>
+            </div>
+            <button id="submit">Submit</button>
+        </div>
+</body>
+
+    <script src="ex.js"></script>
+</html>
