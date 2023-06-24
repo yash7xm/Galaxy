@@ -209,6 +209,10 @@ app.post('/dog', async (req, res) => {
     res.sendStatus(200);
 })
 
+app.get('/ex', (req,res) => {
+    res.render('ex');
+})
+
 async function check() {
     const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',

@@ -10,6 +10,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    transform: scale(0.8);
+    overflow: hidden;
   }
 
   .buttons {
