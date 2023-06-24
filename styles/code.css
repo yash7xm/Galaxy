@@ -23,13 +23,14 @@ a {
 }
 
 nav {
-    margin: 5px 5px 10px 5px;
+    /* margin: 5px 5px 10px 5px; */
+    /* margin-bottom: 5px; */
     background-color: rgb(40, 40, 40);
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    height: 6vh;
-    border-radius: 5px;
+    height: 8vh;
+    font-size: 14px;
     align-items: center;
 }
 
@@ -55,32 +56,41 @@ nav {
 .content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 93vh;
+    grid-template-rows: 90vh;
     /* flex: 1; */
+    gap: 10px;
     height: 100%;
+    padding: 10px;
 }
 
 /* section-1 */
 
 .section-1 {
-    margin: 0 0px 20px 20px;
+    /* margin: 0 0px 20px 20px; */
     background-color: rgb(40, 40, 40);
     grid-column-start: 1;
     /* grid-row-start: 1; */
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     flex: 1;
+    overflow: hidden;
 }
 
 .upper {
-    padding: 10px;
-    border-bottom: 1px solid white;
+    height: 2.25rem;
+    display: flex;
+    /* justify-content: space-evenly; */
+    padding: 0 1rem;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
 }
 
 .upper a {
     color: #eff1f6bf;
-    margin-right: 15px;
+    /* margin-right: 1rem; */
+    font-size: 12px;
 }
 
 .upper a:hover {
@@ -180,11 +190,12 @@ iframe {
 
 .section-1 .lower {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    gap: 5rem;
+    padding: 0px 20px;
+    height: 2.75rem;
     border-top: 1px solid white;
+    background-color: #000;
 }
 
 .problem-list span{
@@ -196,21 +207,28 @@ iframe {
     gap: 1.5rem;
 }
 
+.move-btns span {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 .section-1 .lower span {
     display: flex;
-    gap: 0.5rem;
     background-color: rgb(26, 26, 26);
-    padding: 5px 10px;
+    padding: 6px 15px;
     border-radius: 5px;
     cursor: pointer;
     color: white;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 /* section-2 */
 .section-2 {
-    margin: 0 20px 20px 20px;
+    /* margin: 0 20px 20px 20px; */
     background-color: rgb(40, 40, 40);
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -241,13 +259,17 @@ iframe {
 }
 
 .section-2 .header {
-    padding: 10px 20px;
+    height: 2.25rem;
+    font-size: 14px;
+    /* padding: 10px 20px; */
     color: white;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #ccc;
 }
 
 .section-2 .header span {
+    padding: 0px 16px;
     display: flex;
     gap: 1rem;
 }
