@@ -26,8 +26,8 @@ function handleRunBtn() {
         },
         body: JSON.stringify({
             code: code,
-            info: questionsData[0].project[0].question[2].info,
-            solution: questionsData[0].project[0].question[2].solution
+            info: questionsData[0].project[0].question[3].info,
+            solution: questionsData[0].project[0].question[3].solution
         })
     })
         .then(() => {
@@ -43,6 +43,6 @@ async function fetchData() {
     })
     .then(res => res.json())
     .then(data => questionsData = data);
-    let aa = questionsData[0].project[0].question[2].example;
+    let aa = questionsData[0].project[0].question[3].example;
     exEditor.setValue(aa);
 }

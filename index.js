@@ -229,7 +229,7 @@ async function check() {
         model: 'gpt-3.5-turbo',
         messages: [{
             role: 'user',
-            content: `${code}  can this code be able to centre a div respond with only yes or no`
+            content: `${code}  can this code be able to do the following task ${info} and also check the class names or id names very strictly respond with only yes or no dont provide any additional text`
             // content: `check in the provided code ${code}, the content should be centered in the body, like this solution code ${solution}, response in yes or no only`
         }]
     })
