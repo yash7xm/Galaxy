@@ -1,23 +1,18 @@
 var editor = ace.edit("editor");
 var exEditor = ace.edit("ex-editor");
 exEditor.setTheme("ace/theme/twilight");
-exEditor.session.setMode("ace/mode/css");
+exEditor.session.setMode("ace/mode/html");
 editor.setTheme("ace/theme/twilight");
 editor.session.setMode("ace/mode/html");
 
+
 editor.setOption('enableLiveAutocompletion', true);
 
-
+let questionsData = {};
 const run = document.querySelector('.run-btn');
 
-var initialHTML = 'body {\n' +
-'\tbackground-color: #000;\n' +
-'\tdisplay: flex;\n' +
-'\tjustify-content: center;\n' +
-'\talign-items: center;\n' +
-'\tmin-height: 100vh;\n' +
-'}';
-exEditor.setValue(initialHTML);
+fetchData();
+
 exEditor.setReadOnly(true);
 
 run.addEventListener('click', handleRunBtn);
@@ -36,4 +31,16 @@ function handleRunBtn() {
         .then(() => {
             console.log('correct');
         })
+}
+
+
+
+async function fetchData() {
+    await fetch('/dog', {
+        method: 'POST',
+    })
+    .then(res => res.json())
+    .then(data => questionsData = data);
+    let aa = questionsData[0].project[0].question[0].example;
+    exEditor.setValue(aa);
 }

@@ -36,7 +36,7 @@ nav {
 
 .brand {
     color: white;
-    font-size: 1.2rem;
+    font-size: 1rem;
     height: max-content;
 }
 
@@ -68,12 +68,12 @@ nav {
 .section-1 {
     /* margin: 0 0px 20px 20px; */
     background-color: rgb(40, 40, 40);
-    grid-column-start: 1;
+    /* grid-column-start: 1; */
     /* grid-row-start: 1; */
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    /* flex: 1; */
     overflow: hidden;
 }
 
@@ -127,6 +127,7 @@ nav {
 .middle .header span {
     margin-right: 1.5rem;
     color: white;
+    font-size: 12px;
 }
 
 .difficulty {
@@ -146,12 +147,17 @@ nav {
 }
 
 .ques-heading {
-    font-size: 1.3rem;
+    font-size: 16px;
 }
 
 .ques-info {
+    font-size: 14px;
     margin-top: 20px;
     margin-left: 30px;
+}
+
+.ques-info p{
+    white-space: pre-line;
 }
 
 /* .code-preview {
@@ -166,8 +172,8 @@ nav {
     display: absolute;
     margin: 20px;
     width: 80%;
-    height: 30vh;
-    font-size: 1rem;
+    height: 20vh;
+    font-size: 12px;
     border-radius: 5px;
 }
 
@@ -182,6 +188,7 @@ nav {
 
 .preview p {
     color: white;
+    font-size: 12px;
 }
 
 iframe {
@@ -259,17 +266,18 @@ iframe {
 }
 
 .section-2 .header {
-    height: 2.25rem;
+    height: 2.55rem;
     font-size: 14px;
     /* padding: 10px 20px; */
     color: white;
     display: flex;
+    padding: 0 1rem;
+    align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 }
 
 .section-2 .header span {
-    padding: 0px 16px;
     display: flex;
     gap: 1rem;
 }
@@ -277,35 +285,32 @@ iframe {
 .section-2 .lower {
     display: flex;
     justify-content: space-between;
-    padding: 15px 20px;
+    height: 3.25rem;
+    align-items: center;
+    padding: 0 1rem;
+    /* border-top: 1px solid #ccc; */
 }
 
 .section-2 .lower div {
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    font-size: 13px;
+    padding: 6px 15px;
+    border-radius: 5px;
+}
+
+.right {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     gap: 1rem;
 }
 
-.run-btn {
+.run-btn, .console {
     background-color: rgb(26, 26, 26);
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .submit-btn {
     background-color: green;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.console {
-    background-color: rgb(26, 26, 26);
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+   
 }

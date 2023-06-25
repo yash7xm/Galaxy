@@ -8,6 +8,8 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+
+
 const configuration = new Configuration({
     apiKey: process.env.API_KEY
 });
@@ -33,6 +35,8 @@ const ProjectSchema = new mongoose.Schema({
                     heading: String,
                     info: String,
                     hint: String,
+                    example: String,
+                    preview: Boolean,
                     solution: String,
                     like: Number,
                     dislike: Number,
@@ -55,52 +59,48 @@ const data = new project({
             question: [
                 {
                     heading: "Creating a simple Calculator card.",
-                    info: 'In this task, your goal is to create a user interface for a simple calculator by utilizing HTML. The calculator will be presented as a card, structured with a main <div> element having the class name "calculator-card". Within this card, you will need to include two additional <div> elements to organize the content.' +
-                        '/n' + '/n' +
-                        'The first inner <div>, with the class name "input-div" and insert "0" as default content in this div, this will serve as a container for the calculators input field. This field will be used to display the numbers and results of calculations to the user. ' +
-                        '/n' + '/n' +
-                        'The second inner <div>, with the class name "buttons", will act as a container for the calculators buttons. These buttons will enable users to perform basic mathematical operations such as addition, subtraction, multiplication, and division.',
-                    example: '<div class="class-name">' + '/n' + '/t' + '<div class="nested-class">' + '/n' + '/t' + '</div' + '/n' + '</div>',
-                    solution: '<div class="calculator-card">' + '/n' + '/t' + '<div class="input-div">' + '/n' + '/t' + '</div>' + '/n' + '/t' + '<div class="buttons">' + '/n' + '/t' + '</div>' + '/n' + '</div>',
+                    info: 'In this task, your goal is to create a user interface for a simple calculator by utilizing HTML. The calculator will be presented as a card, structured with a main <div> element having the class name "calculator-card". Within this card, you will need to include two additional <div> elements to organize the content.\n\nThe first inner <div>, with the class name "input-div" and insert "0" as default content in this div, this will serve as a container for the calculator\'s input field. This field will be used to display the numbers and results of calculations to the user.\n\nThe second inner <div>, with the class name "buttons", will act as a container for the calculator\'s buttons. These buttons will enable users to perform basic mathematical operations such as addition, subtraction, multiplication, and division.',
+                    example: '<div class="class-name">\n\t<div class="nested-class">\n\t</div>\n</div>',
+                    solution: '<div class="calculator-card">\n\t<div class="input-div">\n\t</div>\n\t<div class="buttons">\n\t</div>\n</div>',
                     difficulty: 'Easy',
                     preview: false
                 },
                 {
                     heading: 'Adding buttons in Calculator.',
                     info:
-                        'As part of the calculator card creation, you are required to initialize and include 20 button elements inside the <div> element with the class name "buttons". These buttons will provide functionality for various operations and numerical inputs in the calculator.' + '\n' +
-                        'Each button should have a specific content associated with it. The content of the buttons should be initialized in the following order:' + '\n' +
-                        '1. "AC" - Represents the clear all (reset) functionality.' + '\n' +
-                        '2. "DEL" - Represents the delete (backspace) functionality.' + '\n' +
-                        '3. "%" - Represents the percentage functionality.' + '\n' +
-                        '4. "/" - Represents the division operation.' + '\n' +
-                        '5. "7" - Represents the number 7.' + '\n' +
-                        '6. "8" - Represents the number 8.' + '\n' +
-                        '7. "9" - Represents the number 9.' + '\n' +
-                        '8. "*" - Represents the multiplication operation.' + '\n' +
-                        '9. "4" - Represents the number 4.' + '\n' +
-                        '10. "5" - Represents the number 5.' + '\n' +
-                        '11. "6" - Represents the number 6.' + '\n' +
-                        '12. "-" - Represents the subtraction operation.' + '\n' +
-                        '13. "1" - Represents the number 1.' + '\n' +
-                        '14. "2" - Represents the number 2.' + '\n' +
-                        '15. "3" - Represents the number 3.' + '\n' +
-                        '16. "+" - Represents the addition operation.' + '\n' +
-                        '17. "^" - Represents the exponentiation (power) operation.' + '\n' +
-                        '18. "0" - Represents the number 0.' + '\n' +
-                        '19. "." - Represents the decimal point.' + '\n' +
-                        '20. "=" - Represents the calculation (equal) operation.' + '\n' +
-                        'By including these 20 button elements within the "buttons" <div>, you will provide users with a comprehensive set of options to perform various mathematical operations and numerical inputs on the calculator interface.',
+                    'As part of the calculator card creation, you are required to initialize and include 20 button elements inside the <div> element with the class name "buttons". These buttons will provide functionality for various operations and numerical inputs in the calculator.\n' +
+                    'Each button should have a specific content associated with it. The content of the buttons should be initialized in the following order:\n' +
+                    '1. "AC" - Represents the clear all (reset) functionality.\n' +
+                    '2. "DEL" - Represents the delete (backspace) functionality.\n' +
+                    '3. "%" - Represents the percentage functionality.\n' +
+                    '4. "/" - Represents the division operation.\n' +
+                    '5. "7" - Represents the number 7.\n' +
+                    '6. "8" - Represents the number 8.\n' +
+                    '7. "9" - Represents the number 9.\n' +
+                    '8. "*" - Represents the multiplication operation.\n' +
+                    '9. "4" - Represents the number 4.\n' +
+                    '10. "5" - Represents the number 5.\n' +
+                    '11. "6" - Represents the number 6.\n' +
+                    '12. "-" - Represents the subtraction operation.\n' +
+                    '13. "1" - Represents the number 1.\n' +
+                    '14. "2" - Represents the number 2.\n' +
+                    '15. "3" - Represents the number 3.\n' +
+                    '16. "+" - Represents the addition operation.\n' +
+                    '17. "^" - Represents the exponentiation (power) operation.\n' +
+                    '18. "0" - Represents the number 0.\n' +
+                    '19. "." - Represents the decimal point.\n' +
+                    '20. "=" - Represents the calculation (equal) operation.\n' +
+                    'By including these 20 button elements within the "buttons" <div>, you will provide users with a comprehensive set of options to perform various mathematical operations and numerical inputs on the calculator interface.',
                     example: '<button> AC </button>',
-                    solution: '<div class="buttons">' + '\n' + '\t' + '<button>AC</button>' + '\n' + '\t' + '<button>DEL</button>' + '\n' + '\t' + '<button>%</button>' + '\n' + '\t' + '<button>/</button>' + '\n' + '\t' + '<button>7</button>' + '\n' + '\t' + '<button>8</button>' + '\n' + '\t' + '<button>9</button>' + '\n' + '\t' + '<button>*</button>' + '\n' + '\t' + '<button>4</button>' + '\n' + '\t' + '<button>5</button>' + '\n' + '\t' + '<button>6</button>' + '\n' + '\t' + '<button>-</button>' + '\n' + '\t' + '<button>1</button>' + '\n' + '\t' + '<button>2</button>' + '\n' + '\t' + '<button>3</button>' + '\n' + '\t' + '<button>+</button>' + '\n' + '\t' + '<button>^</button>' + '\n' + '\t' + '<button>0</button>' + '\n' + '\t' + '<button>.</button>' + '\n' + '\t' + '<button>=</button>' + '\n' + '</div>',
+                    solution: '<div class="buttons">\n\t<button>AC</button>\n\t<button>DEL</button>\n\t<button>%</button>\n\t<button>/</button>\n\t<button>7</button>\n\t<button>8</button>\n\t<button>9</button>\n\t<button>*</button>\n\t<button>4</button>\n\t<button>5</button>\n\t<button>6</button>\n\t<button>-</button>\n\t<button>1</button>\n\t<button>2</button>\n\t<button>3</button>\n\t<button>+</button>\n\t<button>^</button>\n\t<button>0</button>\n\t<button>.</button>\n\t<button>=</button>\n</div>',
                     difficulty: 'Easy',
                     preview: false
                 },
                 {
                     heading: 'Center the Calculator card.',
-                    info: 'To create an attractive and user-friendly interface, it is essential to style the <body> tag appropriately. This involves centering the calculator card on the page and selecting a suitable background color.' + '/n' +
-                        'The styling of the body tag should ensure that the calculator card is positioned at the center of the page, while also considering the choice of an appropriate background color.',
-                    example: 'body {' + '/n' + '/t' + 'background-color: #000' + '/n' + '}',
+                    info: 'To create an attractive and user-friendly interface, it is essential to style the <body> tag appropriately. This involves centering the calculator card on the page and selecting a suitable background color.\n' +
+                    'The styling of the body tag should ensure that the calculator card is positioned at the center of the page, while also considering the choice of an appropriate background color.',
+                    example: 'body {\n\tbackground-color: #000;\n}',
                     solution: 'body {\n' +
                         '\tbackground-color: #000;\n' +
                         '\tdisplay: flex;\n' +
@@ -115,10 +115,10 @@ const data = new project({
                 },
                 {
                     heading: 'Styling the buttons container',
-                    info: 'Apply the following styles to the <div> element with the class name "buttons" to achieve a visually pleasing layout:' + '/n' +
-                        'Arrange the button elements in a grid with 5 rows and 4 columns.' + '/n' +
-                        'Add appropriate spacing between each button to create gaps.' + '/n' +
-                        'Apply additional styling to enhance the overall appearance and make it visually appealing.',
+                    info: 'Apply the following styles to the <div> element with the class name "buttons" to achieve a visually pleasing layout:\n' +
+                    'Arrange the button elements in a grid with 5 rows and 4 columns.\n' +
+                    'Add appropriate spacing between each button to create gaps.\n' +
+                    'Apply additional styling to enhance the overall appearance and make it visually appealing.',
                     hint: 'Use grid',
                     example: '.buttons {\n' +
                         '\tmargin-top: 20px;\n' +
@@ -144,18 +144,16 @@ const data = new project({
                 },
                 {
                     heading: 'Styling the input-div and buttons.',
-                    info: 'To style the <div> element with the class name "input-div":' + '/n' +
-
-                        'Font Size: Change the text size using font-size.' + '/n' +
-                        'Padding: Add space around the content using padding.' + '/n' +
-                        'Text Alignment: Align the text using text-align.' + '/n' +
-                        'Color: Change the text color using color.' + '/n' +
-                        'To style the <button> elements inside the <div> with the class name "buttons":' + '/n' +
-
-                        'Font Size: Change the text size using font-size.' + '/n' +
-                        'Padding: Add space around the content using padding.' + '/n' +
-                        'Background Color: Change the background color using background-color.' + '/n' +
-                        'Cursor Style: Change the cursor appearance using cursor.',
+                    info: 'To style the <div> element with the class name "input-div":\n' +
+                    'Font Size: Change the text size using font-size.\n' +
+                    'Padding: Add space around the content using padding.\n' +
+                    'Text Alignment: Align the text using text-align.\n' +
+                    'Color: Change the text color using color.\n' +
+                    'To style the <button> elements inside the <div> with the class name "buttons":\n' +
+                    'Font Size: Change the text size using font-size.\n' +
+                    'Padding: Add space around the content using padding.\n' +
+                    'Background Color: Change the background color using background-color.\n' +
+                    'Cursor Style: Change the cursor appearance using cursor.',
                     solution: '.input-div {\n' +
                         '\tfont-size: 1.2rem;\n' +
                         '\tpadding: 5px 15px;\n' +
@@ -192,9 +190,9 @@ const data = new project({
     ]
 })
 
-// data.save();
 
 app.get('/save', async (req, res) => {
+    // await project.deleteMany({});
     const data = await project.find({});
     res.send(data);
 })
@@ -202,11 +200,12 @@ app.get('/save', async (req, res) => {
 app.use(bodyParser.json());
 app.use(cors());
 
+
 let code = '';
 app.post('/dog', async (req, res) => {
-    code = req.body.code;
-    await check();
-    res.sendStatus(200);
+    const data = await project.find({});
+    res.json(data);
+    // res.sendStatus(200);
 })
 
 app.get('/ex', (req,res) => {
@@ -226,7 +225,9 @@ async function check() {
     console.log(checkedCode);
 }
 
-app.get('/path', (req,res) => {
+app.get('/path', async (req,res) => {
+    const data = await project.find({});
+    console.log(data);
     res.render('code', {data});
 })
 
