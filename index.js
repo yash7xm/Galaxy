@@ -202,10 +202,22 @@ app.use(cors());
 
 
 let code = '';
+let info = '';
+let solution = '';
 app.post('/dog', async (req, res) => {
+    code = req.body.code;
+    info = req.body.info;
+    solution = req.body.solution;
+    console.log(code);
+    console.log
+    // console.log(info)
+    check();
+    // res.sendStatus(200);
+})
+
+app.post('/data', async(req,res) => {
     const data = await project.find({});
     res.json(data);
-    // res.sendStatus(200);
 })
 
 app.get('/ex', (req,res) => {
@@ -217,7 +229,8 @@ async function check() {
         model: 'gpt-3.5-turbo',
         messages: [{
             role: 'user',
-            content: `'${code}' check if this code is creating a new div with class name as header and adding a list with 4 li items in it, only response in yes or no`
+            content: `${code}  can this code be able to centre a div respond with only yes or no`
+            // content: `check in the provided code ${code}, the content should be centered in the body, like this solution code ${solution}, response in yes or no only`
         }]
     })
 
@@ -227,7 +240,7 @@ async function check() {
 
 app.get('/path', async (req,res) => {
     const data = await project.find({});
-    console.log(data);
+    // console.log(data);
     res.render('code', {data});
 })
 
