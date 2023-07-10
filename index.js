@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const prettier = require("prettier");
 
 
 const configuration = new Configuration({
@@ -209,10 +209,22 @@ app.post('/dog', async (req, res) => {
     info = req.body.info;
     solution = req.body.solution;
     console.log(code);
-    console.log
+   
     // console.log(info)
     check();
     // res.sendStatus(200);
+})
+
+app.post('/p', async(req,res) => {
+    let code = req.body.code;
+    const formattedCode = await prettier.format(code, {
+        parser: 'html',
+        semi: false,
+        singleQuote: true,
+        trailingComma: 'es5',
+      });
+    console.log(formattedCode);
+    res.json(formattedCode);
 })
 
 app.post('/data', async(req,res) => {
@@ -252,6 +264,6 @@ app.get('/code', (req, res) => {
 })
 
 
-app.listen(8080, () => {
+app.listen(8000, () => {
     console.log('running');
 });
