@@ -294,6 +294,10 @@ app.get('/code', (req, res) => {
     res.send('hl');
 })
 
+app.get('/ques', (req,res) => {
+    res.render('ques');
+})
+
 app.listen(8080, () => {
     console.log('running');
 });
