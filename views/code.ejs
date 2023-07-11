@@ -8,13 +8,17 @@
 
     <script src="https://kit.fontawesome.com/040eb06c51.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/code.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
         <nav>
             <div class="brand">
-                Galaxy
+                DEV learner
             </div>
             <div class="mob-section">
                 <div class="project-list">
@@ -50,14 +54,35 @@
                         <span class="hint"><i class="fa-regular fa-lightbulb" style="color: #ffffff;"></i></span>
                     </div>
                     <div class="question">
-                        <span class="ques-no">1.</span>
-                        <span class="ques-heading"><%= data[0].project[0].question[3].heading %></span>
+                        <span class="ques-no">
+                            <%= data[0].project[0].question[0].quesNumber %>.
+                        </span>
+                        <span class="ques-heading">
+                            <%= data[0].project[0].question[0].heading %>
+                        </span>
                         <div class="ques-info">
-                            <%= data[0].project[0].question[3].info %>
+                            In this task, your goal is to create a user interface for a simple calculator by utilizing
+                            HTML. The calculator will be presented as a card, structured with a main <code>div</code>
+                            element having the class name "calculator-card". Within this card, you will need to include
+                            two additional <code>div</code> elements to organize the content.\n\n
+                            <ul>
+                                <li> The first inner <code>div</code>, with the class name "display" and insert "0" as
+                                    default content in this div, this will serve as a container for the calculator's
+                                    input field. This field will be used to display the numbers and results of
+                                    calculations to the user.\n\n
+                                </li>
+                                <li> The second inner <code>div</code>, with the class name "buttons", will act as a
+                                    container for the calculator's buttons. These buttons will enable users to perform
+                                    basic mathematical operations such as addition, subtraction, multiplication, and
+                                    division.
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
                     <div class="example">
-                        <div id="ex-editor"></div>
+                        <div id="ex-editor">
+                        </div>
                     </div>
                     <div class="preview">
                         <p>Preview:</p>
@@ -66,11 +91,13 @@
                 </div>
                 <div class="lower">
                     <div class="problem-list">
-                        <span>Problem List</span>
+                        <span>Problem List <i class="fa-solid fa-list" style="color: #ffffff;"></i></span>
                     </div>
                     <div class="move-btns">
-                        <span><i class="fa-solid fa-backward"></i></span>
-                        <span><i class="fa-solid fa-forward"></i></span>
+                        <span onclick="handlePrevBtn()"><i class="fa-solid fa-backward" style="color: #ffffff;"></i>
+                            PREV</span>
+                        <span onclick="handleNextBtn()">NEXT <i class="fa-solid fa-forward"
+                                style="color: #ffffff;"></i></span>
                     </div>
                 </div>
             </div>
@@ -79,15 +106,32 @@
                     <span>Javascript</span>
                     <span>
                         <span class="reload"><i class="fa-solid fa-rotate-right" style="color: #ffffff;"></i></span>
+                        <span class="copy"><i class="fa-regular fa-copy" style="color: #ffffff;"></i></span>
                         <span class="settings"><i class="fa-solid fa-gear" style="color: #ffffff;"></i></span>
                     </span>
                 </div>
                 <div id="editor"></div>
+                <div class="console-area hidden">
+                    <div class="header">
+                        <span>Result</span>
+                        <span>Feedback (<span>beta</span>)</span>
+                    </div>
+                    <div class="middle">
+                        <div class="result">
+                            <span class="fullscreen-btn smallscreenBtn"><i class="fa-solid fa-maximize"></i></span>
+                            <iframe src="/calculator" frameborder="0"></iframe>
+                        </div>
+                        <div class="feedback hidden">
+                            Let's Goooo! <br> Run your code for feedback
+                        </div>
+                    </div>
+                </div>
                 <div class="lower">
-                    <div class="console">Console</div>
+                    <div class="console">Console <i class="fa-solid fa-terminal" style="color: #ffffff;"></i></div>
                     <div class="right">
-                        <div class="run-btn">Check</div>
-                        <div class="submit-btn">Submit</div>
+                        <div class="run-btn">Run <i class="fa-solid fa-circle-check" style="color: #ffffff;"></i></div>
+                        <div class="submit-btn">Submit <i class="fa-solid fa-right-to-bracket"
+                                style="color: #ffffff;"></i></div>
                     </div>
                 </div>
             </div>
@@ -100,7 +144,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ext-language_tools.min.js"
         integrity="sha512-Thg/+2CD9a62wd9RhUes0dWKbg4Pq90sCXWr5JpKsIiqcW0Km46AbE662jiUI+z441pTYSM8D+/9LOuEscAuIQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/scripts/code.js"></script>
+    <script src="/scripts/code.js" type="module"></script>
 </body>
 
 </html>
