@@ -246,8 +246,9 @@ app.post('/p', async (req, res) => {
 });
 
 app.get('/ex', (req, res) => {
-    const filePath = path.join(__dirname, 'ex.html');
-    res.sendFile(filePath);
+    // const filePath = path.join(__dirname, 'ex.ejs');
+    // res.sendFile(filePath);
+    res.render('ex')
 });
 
 app.get('/calculator', (req, res) => {
