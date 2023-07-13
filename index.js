@@ -57,7 +57,39 @@ mongoose.connect(process.env.MONGO_PROD_URL)
     });
     
     const project = mongoose.model('project', ProjectSchema);
+
+
+    const UserSchema = new mongoose.Schema({
+                name: String,
+                projects: [
+                    {
+                        questions: [
+                            {
+                                editorhtml: String,
+                                editorcss: String,
+                                editorjs: String,
+                                submissions: [
+                                    {
+                                        type: String
+                                    },
+                                ]
+                            },
+                        ]
+                    },
+                ]
+    })
+
+    const user = mongoose.model('user', UserSchema);
+
+    const newUser = new user({
+        name: 'Yash',
+    })
+
     
+app.get('/saveUser', async (req,res) => {
+    await newUser.save();
+    res.send(user.find({}));
+})
     const data = new project({
         project: [
             {

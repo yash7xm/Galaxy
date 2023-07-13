@@ -135,3 +135,18 @@ function handlePrevBtn() {
     questionHeading = questionsData[0].project[0].question[questionNumber].heading;
     questionInfo = questionsData[0].project[0].question[questionNumber].info;
 }
+
+
+const submitButton = document.querySelector('.submit-btn');
+
+submitButton.addEventListener('click', () => {
+    fetch('/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: {
+            
+        }
+    })
+})
