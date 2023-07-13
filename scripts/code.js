@@ -98,6 +98,7 @@ async function handleRunBtn() {
         consoleArea.classList.remove('hidden');
         consoleArea.classList.add('visible');
     }
+     iframe.contentWindow.location.reload();
 }
 
 
