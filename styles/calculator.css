@@ -25,7 +25,7 @@ body {
     border-radius: 5px;
 }
 
-.input-div {
+.display {
     font-size: 1.2rem;
     padding: 5px 15px;
     text-align: end;
@@ -33,7 +33,7 @@ body {
 }
 
 
-.buttons button {
+ button {
     font-size: 0.7rem;
     padding: 2.5px;
     background-color: #555;
