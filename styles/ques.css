@@ -55,8 +55,11 @@ nav {
 .head {
     display: flex;
     height: 20vh;
-    margin: 2rem 5rem;
-    justify-content: space-between;
+    margin: 2rem 0rem;
+    padding: 0rem 5rem;
+    width: 100%;
+    gap: 1rem;
+    /* justify-content: space-between; */
 }
 
 .heading, .info {
@@ -66,44 +69,64 @@ nav {
     padding: 1rem;
     display: flex;
     align-items: center;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #111111;
 }
 
-.heading{
+.heading {
     width: 70%;
-    border: 1px solid white;
+    /* border: 1px solid white; */
 }
 
 .info {
-    border: 1px solid white;
-    width: 10%;
+    /* border: 1px solid white; */
+    width: 30%;
     text-align: right;
     font-size: 0.8rem;
 }
 
-
-.head div {
-    width: calc(100%/3);
-}
-
-iframe {
+main {
+    display: flex;
     width: 100%;
+    padding: 0rem 5rem;
+    gap: 1rem;
     height: 100%;
 }
 
+.frame {
+    width: 30%;
+    border: 1px solid white;
+    border-radius: 5px;
+    height: 100%;
+}
+
+iframe {
+    height: 100vh;
+}
+
 .ques-list {
-    margin: 1rem 10rem;
     display: flex;
     flex-direction: column;
+    width: 70%;
+    /* border: 1px solid white; */
+    border-radius: 10px;
+    overflow: hidden;
+    gap: 1rem;
+    padding: 0rem 1rem;
 }
 
 .ques {
-    height: 1.25rem;
+    height: 2rem;
     display: flex;
     width: 100%;
-    padding: 11px 0px;
-    background-color: #fff;
-    overflow: hidden;
-    color: black;
+    align-items: center;
+    /* padding: 11px 0px; */
+    /* background-color: #fff; */
+    /* overflow: hidden; */
+    color: white;
+    background-color: #111111;
+    border-radius: 10px;
 }
 
 .ques-no, .difficulty, .completed, .lock {

@@ -478,6 +478,10 @@ code {
     white-space: pre-wrap
 }
 
+.ques-info {
+    line-height: 1.5rem;
+}
+
 .ques-info ul li {
     margin-left: 1.5rem;
 }
