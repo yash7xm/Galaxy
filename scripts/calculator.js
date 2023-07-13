@@ -1,42 +1,55 @@
-const input = document.querySelector('.input-div');
+const input = document.querySelector('.display');
 const buttons = document.querySelectorAll('.buttons button');
-let str = '';
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
-        console.log('clicked');
-        const value = button.innerText;
-        console.log(value);
-        if(value == 'AC'){
-            input.innerText="0";
-            str="";
-        }
-        else if(value == 'DEL'){
-            if(str != ''){
-                str = str.slice(0,-1);
-                if(str == '')
-                input.innerText = '0';
-                else
-                input.innerText = str;
-            }
-        }
-        else if(value == '='){
-            calculate(str);
-        }
-        else{
-            str=str.concat(value);
-            input.innerText=str;        
-        }
+        let value = button.innerText;
+        handleClickedButtons(value);
     })
 })
 
-function calculate(event){
-    input.innerText="";
-    str = '';
+function handleClickedButtons(value) {
+    if (value === 'AC') {
+        handleAcButton();
+    }
+    else if (value === 'DEL') {
+        handleDelButton();
+    }
+    else if (value === '=') {
+        calculate();
+    }
+    else {
+        handleRestOfTheButtons(value);
+    }
+}
+
+function handleAcButton() {
+    input.innerText = '0';
+}
+
+function handleDelButton() {
+    let currentText = input.innerText;
+    if (currentText !== '0') {
+        input.innerText = currentText.slice(0, -1);
+        if (input.innerText === '') {
+            input.innerText = '0';
+        }
+    }
+}
+
+function handleRestOfTheButtons(value) {
+    if (input.innerText === '0') {
+        input.innerText = value;
+    } else {
+        input.innerText += value;
+    }
+}
+
+function calculate() {
     try {
-      input.innerText=eval(event);
+        input.innerText = eval(input.innerText);
     }
-    catch (error){
-      input.innerText="Invalid Expression";
+    catch (error) {
+        input.innerText = 'Invalid Expression';
     }
-  }
+}

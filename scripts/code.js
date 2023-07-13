@@ -3,7 +3,7 @@ import { addCommentsInHtml, addCommentsInCss, addCommentsInJs } from './project.
 var editor = ace.edit("editor");
 var exEditor = ace.edit("ex-editor");
 exEditor.setTheme("ace/theme/twilight");
-exEditor.session.setMode("ace/mode/html");
+exEditor.session.setMode("ace/mode/css");
 exEditor.clearSelection();
 editor.setTheme("ace/theme/twilight");
 editor.session.setMode("ace/mode/html");
@@ -24,7 +24,7 @@ run.addEventListener('click', handleRunBtn);
 async function handleRunBtn() {
     let code = editor.getValue();
 
-   code =  addCommentsInHtml(code, 'a');
+    code =  addCommentsInHtml(code, 'a');
     await fetch('/p', {
         method: 'POST',
         headers: {
@@ -75,7 +75,7 @@ async function example() {
             method: 'POST'
         });
         questionsData = await response.json();
-        const exampleValue = questionsData[0].project[0].question[0].example;
+        const exampleValue = questionsData[0].project[0].question[4].example;
         exEditor.setValue(exampleValue);
     } catch (error) {
         console.error(error);
