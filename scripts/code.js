@@ -20,7 +20,6 @@ const run = document.querySelector('.run-btn');
 exEditor.setReadOnly(true);
 
 run.addEventListener('click', handleRunBtn);
-
 async function handleRunBtn() {
     let code = editor.getValue();
 
@@ -39,7 +38,40 @@ async function handleRunBtn() {
     //  code =  addLine(data, 'a');
     editor.setValue(data);
     });
+    console.log(playerData);
 
+    let htmlCode = '', cssCode = '', jsCode = '';
+    const language = questionsData[0].project[0].question[0].lang;
+    if(language == 'html') {
+        htmlCode = editor.getValue();
+        console.log(playerData.projects[0].question[0].editor['css'])
+        cssCode = playerData.projects[0].question[0].editor['css'];
+        jsCode = playerData.projects[0].question[0].editor['js'];
+    }
+    else if(language == 'css') {
+        htmlCode = playerData.projects[0].question[0].editor['html'];
+        cssCode = editor.getValue();
+        jsCode = playerData.projects[0].question[0].editor['js'];
+    }
+    else {
+        htmlCode = playerData.projects[0].question[0].editor['html'];
+        cssCode = playerData.projects[0].question[0].editor['css'];
+        jsCode = editor.getValue();
+    }
+
+    fetch('/handleRunBtn', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            quesNo: questionsData[0].project[0].question[0].quesNumber,
+            lang: questionsData[0].project[0].question[0].lang,
+            html: htmlCode,
+            css: cssCode,
+            js: jsCode,
+        })
+    })
 
 
 
