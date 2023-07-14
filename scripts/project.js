@@ -6,6 +6,7 @@ export function addCommentsInHtml(str, Sclass) {
     console.log(str)
     console.log(tempDiv.innerHTML);
     const selectedClass = tempDiv.querySelector(`.${Sclass}`);
+    if(selectedClass.innerHTML == '')
     selectedClass.innerHTML = '\n<!-- Write your code here -->\n';
     console.log(tempDiv.innerHTML);
     return `<body>  ${tempDiv.innerHTML} </body>`;
