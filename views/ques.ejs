@@ -37,149 +37,20 @@
     
     <main>
         <div class="ques-list">
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
-            <div class="ques">
-                <span class="ques-no">1</span>
-                <span class="ques-heading"> Make a calculator card</span>
-                <span class="difficulty">Easy</span>
-                <span class="completed">
-                    <i class="fa-solid fa-circle-check"></i>
-                </span>
-                <span class="lock">
-                    <i class="fa-solid fa-lock"></i>
-                </span>
-            </div>
+            <% for(let i = 0; i < data[0].project[0].question.length; i++) { %>
+                <div class="ques <%= i % 2 === 0 ? 'bg' : '' %>" value = '<%= i+1 %>'>
+                    <span class="ques-no"><%= i + 1 %>.</span>
+                    <span class="ques-heading"><%= data[0].project[0].question[i].heading %></span>
+                    <span class="difficulty"><%= data[0].project[0].question[i].difficulty %></span>
+                    <span class="completed">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                    <span class="lock">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+                </div>
+            <% } %>
+            
         </div>
         <div class="frame">
             <iframe src="/ex" frameborder="0"></iframe>

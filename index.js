@@ -598,6 +598,11 @@ app.get('/path', async (req, res) => {
     res.render('code', { data });
 })
 
+app.get('/ques', async (req,res) => {
+    const data = await project.find({});
+    res.render('ques', { data });
+})
+
 app.get('/code', (req, res) => {
     res.send(code);
     res.send('hl');
