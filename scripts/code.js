@@ -1,4 +1,3 @@
-
 import { addCommentsInHtml, addCommentsInCss, addCommentsInJs } from './project.js'
 
 var editor = ace.edit("editor");
@@ -14,28 +13,24 @@ editor.setOption('enableLiveAutocompletion', true);
 
 const questionHeading = document.querySelector('.ques-heading');
 const questionInfo  = document.querySelector('.ques-info');
-const quesNo = document.querySelector('.ques-no');
 
 const iframe = document.querySelector('.result iframe');
-let language = document.querySelector('.language').innerText;
-
-
 
 let questionsData = {};
 let playerData = {};
-let questionNumber = (quesNo.textContent);
+let language = '';
+let questionNumber = document.querySelector('.v').textContent;
 const run = document.querySelector('.run-btn');
 const submit = document.querySelector('.submit-btn');
-// document.addEventListener('DOMContentLoaded', async () =>{
-//     await example();
-//     await player();
-//     language = questionsData[0].project[0].question[questionNumber].lang;
-//   })
-example();
-player();
+document.addEventListener('DOMContentLoaded', async () =>{
+    await example();
+    await player();
+    language = questionsData[0].project[0].question[questionNumber].lang;
+    console.log(language);
+})
 
 
-console.log(language);
+
 
 exEditor.setReadOnly(true);
 
@@ -123,17 +118,15 @@ async function handleRunBtn() {
 
 
 async function example() {
-    try {
-        const response = await fetch('/exampleData', {
-            method: 'POST'
-        });
-        questionsData = await response.json();
-        const exampleValue = questionsData[0].project[0].question[questionNumber].example;
-        exEditor.setValue(exampleValue);
-        console.log(questionsData[0].project[0].question[questionNumber].lang)
-    } catch (error) {
-        console.error(error);
-    }
+    await fetch('/exampleData', {
+        method: "POST"
+    })
+    .then(response => response.json())
+    .then(data => questionsData = data)
+    .then(() => {
+        const exampleData = questionsData[0].project[0].question[questionNumber].example;
+        exEditor.setValue(exampleData)
+    })
 }
 
 
