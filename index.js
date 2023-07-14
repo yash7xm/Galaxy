@@ -54,7 +54,7 @@ const PlayerSchema = new mongoose.Schema({
 
 const Player = mongoose.model('Player', PlayerSchema);
 const newPlayer = new Player({
-    name: 'yash',
+    name: 'a',
     projects: [
         {
             question: [
@@ -453,8 +453,9 @@ app.post('/dog', async (req, res) => {
 
 app.post('/p', async (req, res) => {
     let code = req.body.code;
+    let lang = req.body.lang;
     const formattedCode = await prettier.format(code, {
-        parser: 'html',
+        parser: lang,
         semi: false,
         singleQuote: true,
         trailingComma: 'es5',
@@ -470,9 +471,12 @@ app.post('/submit', async (req, res) => {
     let code = req.body.code;
     let lang = req.body.lang;
     const number= req.body.quesNo;
-    const PlayerData = await Player.findOne({ name: 'yash' });
+    const PlayerData = await Player.findOne({ name: 'a' });
     PlayerData.projects[0].question[number-1].editor[lang] = code;
     PlayerData.projects[0].question[number-1].submissions.push(code)
+    if(PlayerData.projects[0].question[number])
+    console.log('hello');
+    else{
         const newQuestion = {
             editor: {
                 html: "",
@@ -487,6 +491,7 @@ app.post('/submit', async (req, res) => {
         newQuestion.editor['css'] = PlayerData.projects[0].question[number-1].editor['css'];
         newQuestion.editor['js'] = PlayerData.projects[0].question[number-1].editor['js'];
         PlayerData.projects[0].question.push(newQuestion);
+    }
     await PlayerData.save();
     res.send(PlayerData);
 });
@@ -546,7 +551,7 @@ app.post('/handleRunBtn', async (req, res) => {
 
 app.get('/showData',  async (req,res) => {
     // await Player.deleteMany({});
-    res.send(await Player.find({}));
+    res.send(await Player.find({ name: 'a' }));
 })
 
 app.get('/ex', (req, res) => {
@@ -566,7 +571,7 @@ app.post('/exampleData', async (req, res) => {
 })
 
 app.post('/playerData', async (req, res) => {
-    const data = await Player.findOne({ name: 'yash'});
+    const data = await Player.findOne({ name: 'a'});
     res.json(data);
 })
 

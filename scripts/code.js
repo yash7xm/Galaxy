@@ -3,11 +3,10 @@ import { addCommentsInHtml, addCommentsInCss, addCommentsInJs } from './project.
 var editor = ace.edit("editor");
 var exEditor = ace.edit("ex-editor");
 exEditor.setTheme("ace/theme/twilight");
-exEditor.session.setMode("ace/mode/css");
 exEditor.clearSelection();
 editor.setTheme("ace/theme/twilight");
-editor.session.setMode("ace/mode/html");
 
+exEditor.setReadOnly(true);
 
 editor.setOption('enableLiveAutocompletion', true);
 
@@ -26,33 +25,50 @@ document.addEventListener('DOMContentLoaded', async () =>{
     await example();
     await player();
     language = questionsData[0].project[0].question[questionNumber].lang;
+    exEditor.session.setMode(`ace/mode/${language}`);
+    if(language == 'js')
+    editor.session.setMode('ace/mode/javascript');
+    else
+    editor.session.setMode(`ace/mode/${language}`);
+    let codeFromDataBase = playerData.projects[0].question[questionNumber].editor[language];
+    if(questionNumber!=0) loadCode(codeFromDataBase);
+    else editor.setValue(codeFromDataBase);
     console.log(language);
 })
 
-
-
-
-exEditor.setReadOnly(true);
-
-run.addEventListener('click', handleRunBtn);
-
-async function handleRunBtn() {
-    let code = editor.getValue();
-
-    code =  addCommentsInHtml(code, 'a');
+async function loadCode(codeFromDataBase) {
+    let code = codeFromDataBase;
+    let htmlClass = ''
+    if(language == 'html'){
+    htmlClass = questionsData[0].project[0].question[questionNumber].selectedClassForHtml;
+    code =  addCommentsInHtml(code, htmlClass);
+    }
+    else if(language == 'css'){
+        code = addCommentsInCss(code);
+    }
+    else{
+        code = addCommentsInJs(code);
+    }
     await fetch('/p', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            code: code
+            code: code,
+            lang: language
         })
     })
     .then(response => response.json())
     .then(data => {
-    editor.setValue(data);
+      editor.setValue(data);
     });
+}
+
+run.addEventListener('click', handleRunBtn);
+
+async function handleRunBtn() {
+    let code = editor.getValue();
     console.log(playerData);
 
     let htmlCode = '', cssCode = '', jsCode = '';
@@ -86,8 +102,6 @@ async function handleRunBtn() {
             js: jsCode,
         })
     })
-
-
 
     if (code) {
         fetch('/dog', {
@@ -204,8 +218,8 @@ async function handleSubmitBtn() {
             },
         body: JSON.stringify({
             code: code,
-            lang: questionsData[0].project[0].question[0].lang,
-            quesNo: questionsData[0].project[0].question[0].quesNumber,
+            lang: questionsData[0].project[0].question[questionNumber].lang,
+            quesNo: questionsData[0].project[0].question[questionNumber].quesNumber,
         })
     })
 }
@@ -218,9 +232,8 @@ let cacheFlag = false;
 langBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
         // console.log('click')
-        const language = questionsData[0].project[0].question[0].lang;
         // console.log(language)
-        if(btn.className === questionsData[0].project[0].question[0].lang) {
+        if(btn.className === language) {
             // console.log(cache)
             editor.setValue(cache);
             cacheFlag = false;
@@ -228,7 +241,7 @@ langBtns.forEach((btn) => {
         else {
             if(cacheFlag == false)
                 cache = editor.getValue();
-            const value = playerData[0].projects[0].question[0].editor[language];
+            const value = language;
             editor.setValue(value);
             cacheFlag = true;
         }
