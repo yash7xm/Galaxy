@@ -2,7 +2,8 @@ const ques = document.querySelectorAll('.ques');
 
 ques.forEach(q => {
     q.addEventListener('click', (e) => {
-        const value = e.target.value
+        const value = q.getAttribute('value')
+        console.log(value);
         fetch('/quesValue', {
             method: "POST",
             headers: {

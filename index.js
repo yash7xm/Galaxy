@@ -594,12 +594,14 @@ async function check() {
 let value = ''
 app.post('/quesValue', (req,res) => {
     value = req.body.value;
+    value--;
     res.sendStatus(200);
 })
 
 app.get('/path', async (req, res) => {
     const data = await project.find({});
     if(value != ''){
+        console.log(value);
         res.render('code', { data,value });
     }
     
