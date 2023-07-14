@@ -55,13 +55,13 @@
                     </div>
                     <div class="question">
                         <span class="ques-no">
-                            <%= data[0].project[0].question[value?value:0].quesNumber %>.
+                            <%= data[0].project[0].question[value !== undefined ? value : 0].quesNumber %>.
                         </span>
                         <span class="ques-heading">
-                            <%= data[0].project[0].question[value?value:0].heading %>
+                            <%= data[0].project[0].question[value !== undefined ? value : 0].heading %>
                         </span>
                         <div class="ques-info">
-                            <%- data[0].project[0].question[value?value:0].info %>
+                            <%- data[0].project[0].question[value !== undefined ? value : 0].info %>
                             
                         </div> 
                     </div>
@@ -126,6 +126,8 @@
             </div>
         </div>
     </div>
+
+    <div class="language" style="display: none;"><%= data[0].project[0].question[value !== undefined ? value : 0].lang %></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ace.js"
         integrity="sha512-+jESSLfWnLFLB0xrEnlj3yESiiuuuOnVDcq+HXImWWCB5CBqAnVsmtIZ5GtrNMH0C6gPZoj6n14zJ0iwGYoswQ=="

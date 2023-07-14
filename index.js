@@ -604,9 +604,9 @@ app.get('/path', async (req, res) => {
         console.log(value);
         res.render('code', { data,value });
     }
-    
-    // console.log(data);
-    res.render('code', { data });
+    else {
+        res.render('code', { data });
+    }
 })
 
 app.get('/ques', async (req,res) => {

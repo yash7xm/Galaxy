@@ -14,12 +14,28 @@ editor.setOption('enableLiveAutocompletion', true);
 
 const questionHeading = document.querySelector('.ques-heading');
 const questionInfo  = document.querySelector('.ques-info');
+const quesNo = document.querySelector('.ques-no');
+
 const iframe = document.querySelector('.result iframe');
+let language = document.querySelector('.language').innerText;
+
+
 
 let questionsData = {};
 let playerData = {};
+let questionNumber = (quesNo.textContent);
 const run = document.querySelector('.run-btn');
 const submit = document.querySelector('.submit-btn');
+// document.addEventListener('DOMContentLoaded', async () =>{
+//     await example();
+//     await player();
+//     language = questionsData[0].project[0].question[questionNumber].lang;
+//   })
+example();
+player();
+
+
+console.log(language);
 
 exEditor.setReadOnly(true);
 
@@ -40,27 +56,25 @@ async function handleRunBtn() {
     })
     .then(response => response.json())
     .then(data => {
-    //  code =  addLine(data, 'a');
     editor.setValue(data);
     });
     console.log(playerData);
 
     let htmlCode = '', cssCode = '', jsCode = '';
-    const language = questionsData[0].project[0].question[0].lang;
     if(language == 'html') {
         htmlCode = editor.getValue();
-        console.log(playerData.projects[0].question[0].editor['css'])
-        cssCode = playerData.projects[0].question[0].editor['css'];
-        jsCode = playerData.projects[0].question[0].editor['js'];
+        console.log(playerData.projects[0].question[questionNumber].editor['css'])
+        cssCode = playerData.projects[0].question[questionNumber].editor['css'];
+        jsCode = playerData.projects[0].question[questionNumber].editor['js'];
     }
     else if(language == 'css') {
-        htmlCode = playerData.projects[0].question[0].editor['html'];
+        htmlCode = playerData.projects[0].question[questionNumber].editor['html'];
         cssCode = editor.getValue();
-        jsCode = playerData.projects[0].question[0].editor['js'];
+        jsCode = playerData.projects[0].question[questionNumber].editor['js'];
     }
     else {
-        htmlCode = playerData.projects[0].question[0].editor['html'];
-        cssCode = playerData.projects[0].question[0].editor['css'];
+        htmlCode = playerData.projects[0].question[questionNumber].editor['html'];
+        cssCode = playerData.projects[0].question[questionNumber].editor['css'];
         jsCode = editor.getValue();
     }
 
@@ -70,8 +84,8 @@ async function handleRunBtn() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            quesNo: questionsData[0].project[0].question[0].quesNumber,
-            lang: questionsData[0].project[0].question[0].lang,
+            quesNo: questionsData[0].project[0].question[questionNumber].quesNumber,
+            lang: questionsData[0].project[0].question[questionNumber].lang,
             html: htmlCode,
             css: cssCode,
             js: jsCode,
@@ -88,9 +102,9 @@ async function handleRunBtn() {
             },
             body: JSON.stringify({
                 code: code,
-                info: questionsData[0].project[0].question[0].info,
-                solution: questionsData[0].project[0].question[0].solution,
-                prompt: questionsData[0].project[0].question[0].prompt
+                info: questionsData[0].project[0].question[questionNumber].info,
+                solution: questionsData[0].project[0].question[questionNumber].solution,
+                prompt: questionsData[0].project[0].question[questionNumber].prompt
             })
         })
             .then(res => res.json())
@@ -114,14 +128,14 @@ async function example() {
             method: 'POST'
         });
         questionsData = await response.json();
-        const exampleValue = questionsData[0].project[0].question[0].example;
+        const exampleValue = questionsData[0].project[0].question[questionNumber].example;
         exEditor.setValue(exampleValue);
-        console.log(questionsData[0].project[0].question[10].lang)
+        console.log(questionsData[0].project[0].question[questionNumber].lang)
     } catch (error) {
         console.error(error);
     }
 }
-example();
+
 
 async function player() {
     await fetch('/playerData', {
@@ -130,7 +144,7 @@ async function player() {
     .then(response => response.json())
     .then(data => playerData = data)
 }
-player();
+
 
 const consoleBtn = document.querySelector('.console');
 const consoleArea = document.querySelector('.console-area');
