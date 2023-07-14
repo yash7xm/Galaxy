@@ -591,22 +591,17 @@ async function check() {
     console.log(checkedCode);
     return checkedCode;
 }
-let value = ''
+let value = 0;
 app.post('/quesValue', (req,res) => {
     value = req.body.value;
+    console.log(value);
     value--;
     res.sendStatus(200);
 })
 
 app.get('/path', async (req, res) => {
     const data = await project.find({});
-    if(value != ''){
-        console.log(value);
-        res.render('code', { data,value });
-    }
-    else {
-        res.render('code', { data });
-    }
+    res.render('code', { data, value: value });
 })
 
 app.get('/ques', async (req,res) => {

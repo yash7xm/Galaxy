@@ -1,7 +1,7 @@
 const ques = document.querySelectorAll('.ques');
 
 ques.forEach(q => {
-    q.addEventListener('click', (e) => {
+    q.addEventListener('click', () => {
         const value = q.getAttribute('value')
         console.log(value);
         fetch('/quesValue', {
