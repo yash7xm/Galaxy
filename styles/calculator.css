@@ -1,8 +1,36 @@
-/* Write your code here */
 body {
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.buttons {
+  color: white;
+  background-color: #333;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  padding: 0.8rem;
+}
+
+/* Write your code here */
+button {
+    cursor: pointer;
+    font-size: 0.7rem;
+}
+
+.display {
+    text-align: end;
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.calculator-card {
+    background-color: #222;
+    padding: 1rem;
+    border-radius: 10px;
 }

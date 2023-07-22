@@ -54,7 +54,7 @@ const PlayerSchema = new mongoose.Schema({
 
 const Player = mongoose.model('Player', PlayerSchema);
 const newPlayer = new Player({
-    name: 'a',
+    name: 'r',
     projects: [
         {
             question: [
@@ -471,7 +471,7 @@ app.post('/submit', async (req, res) => {
     let code = req.body.code;
     let lang = req.body.lang;
     const number= req.body.quesNo;
-    const PlayerData = await Player.findOne({ name: 'a' });
+    const PlayerData = await Player.findOne({ name: 'r' });
     PlayerData.projects[0].question[number-1].editor[lang] = code;
     PlayerData.projects[0].question[number-1].submissions.push(code)
     if(PlayerData.projects[0].question[number])
@@ -551,7 +551,7 @@ app.post('/handleRunBtn', async (req, res) => {
 
 app.get('/showData',  async (req,res) => {
     // await Player.deleteMany({});
-    res.send(await Player.find({ name: 'a' }));
+    res.send(await Player.find({ name: 'r' }));
 })
 
 app.get('/ex', (req, res) => {
@@ -571,7 +571,7 @@ app.post('/exampleData', async (req, res) => {
 })
 
 app.post('/playerData', async (req, res) => {
-    const data = await Player.findOne({ name: 'a'});
+    const data = await Player.findOne({ name: 'r'});
     res.json(data);
 })
 
