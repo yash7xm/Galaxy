@@ -54,13 +54,13 @@ const PlayerSchema = new mongoose.Schema({
 
 const Player = mongoose.model('Player', PlayerSchema);
 const newPlayer = new Player({
-    name: 'r',
+    name: 'yash',
     projects: [
         {
             question: [
                 {
                     editor: {
-                        html: "<body>\n\n</body>",
+                        html: "<body>\n\t<!-- write your code here -->\n</body>",
                         css: "",
                         js: ""
                     }
@@ -167,6 +167,7 @@ const data = new project({
                     difficulty: 'Easy',
                     preview: false,
                     lang: 'html',
+                    selectedClassForHtml: 'buttons'
                 },
                 {
                     quesNumber: 3,
@@ -439,21 +440,26 @@ let code = '';
 let info = '';
 let solution = '';
 let checkedCode = '';
+
 app.post('/dog', async (req, res) => {
-    code = req.body.code;
-    info = req.body.info;
-    solution = req.body.solution;
-    prompt = req.body.prompt;
-    // console.log(code);
-    // console.log(prompt)
-    const feedback = await check();
-    res.json({ feedback });
-    // res.sendStatus(200);
-})
+    try {
+      const code = req.body.code;
+      const info = req.body.info;
+      const solution = req.body.solution;
+      const prompt = req.body.prompt;
+      // console.log(code);
+      // console.log(prompt)
+      const feedback = await check(code, info);
+      res.json({ feedback });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while processing the request.' });
+    }
+});
 
 app.post('/p', async (req, res) => {
     let code = req.body.code;
-    let lang = req.body.lang;
+    const lang = req.body.lang;
     const formattedCode = await prettier.format(code, {
         parser: lang,
         semi: false,
@@ -463,7 +469,7 @@ app.post('/p', async (req, res) => {
         htmlWhitespaceSensitivity: 'ignore', // Ignore HTML indentation rules
         embeddedLanguageFormatting: 'off', // Disable formatting for embedded languages
     });
-    console.log(formattedCode);
+    // console.log(formattedCode);
     res.json(formattedCode);
 });
 
@@ -471,12 +477,10 @@ app.post('/submit', async (req, res) => {
     let code = req.body.code;
     let lang = req.body.lang;
     const number= req.body.quesNo;
-    const PlayerData = await Player.findOne({ name: 'r' });
+    const PlayerData = await Player.findOne({ name: 'yash' });
     PlayerData.projects[0].question[number-1].editor[lang] = code;
-    PlayerData.projects[0].question[number-1].submissions.push(code)
-    if(PlayerData.projects[0].question[number])
-    console.log('hello');
-    else{
+    PlayerData.projects[0].question[number-1].submissions.push(code);
+    if(!PlayerData.projects[0].question[number]){
         const newQuestion = {
             editor: {
                 html: "",
@@ -493,7 +497,7 @@ app.post('/submit', async (req, res) => {
         PlayerData.projects[0].question.push(newQuestion);
     }
     await PlayerData.save();
-    res.send(PlayerData);
+    res.sendStatus(200);
 });
 
 app.post('/handleRunBtn', async (req, res) => {
@@ -522,7 +526,7 @@ app.post('/handleRunBtn', async (req, res) => {
             if (err) {
             console.error(err);
             } else {
-            console.log('File successfully written');
+            console.log('Html File successfully written');
             }
         });
     }
@@ -532,7 +536,7 @@ app.post('/handleRunBtn', async (req, res) => {
             if (err) {
             console.error(err);
             } else {
-            console.log('File successfully written');
+            console.log('Css File successfully written');
             }
         });
     }
@@ -542,22 +546,49 @@ app.post('/handleRunBtn', async (req, res) => {
             if (err) {
             console.error(err);
             } else {
-            console.log('File successfully written');
+            console.log('Js File successfully written');
             }
         });
     }
     res.sendStatus(200);
 })
 
+app.post('/clearIframe', (req, res) => {
+    fs.writeFile('./calculator.html', '', function(err) {
+        if (err) {
+          console.log('Error erasing file content:', err);
+        } else {
+          console.log('html content erased successfully.');
+        }
+    });
+
+    fs.writeFile('./styles/calculator.css', '', function(err) {
+        if (err) {
+          console.log('Error erasing file content:', err);
+        } else {
+          console.log('css content erased successfully.');
+        }
+    });
+
+    fs.writeFile('./scripts/calculator.js', '', function(err) {
+        if (err) {
+          console.log('Error erasing file content:', err);
+        } else {
+          console.log('js content erased successfully.');
+        }
+    });
+
+    res.sendStatus(200);
+})
+
 app.get('/showData',  async (req,res) => {
     // await Player.deleteMany({});
-    res.send(await Player.find({ name: 'r' }));
+    res.send(await Player.find({}));
 })
 
 app.get('/ex', (req, res) => {
-    // const filePath = path.join(__dirname, 'ex.html');
-    // res.sendFile(filePath);
-    res.render('ex');
+    const filePath = path.join(__dirname, 'ex.html');
+    res.sendFile(filePath);
 });
 
 app.get('/calculator', (req, res) => {
@@ -571,42 +602,60 @@ app.post('/exampleData', async (req, res) => {
 })
 
 app.post('/playerData', async (req, res) => {
-    const data = await Player.findOne({ name: 'r'});
+    const data = await Player.findOne({ name: 'yash'});
     res.json(data);
 })
 
-async function check() {
-    const completion = await openai.createChatCompletion({
+async function check(code, info) {
+    try {
+      const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
         messages: [{
-            role: 'user',
-            content: `You have been assigned the task of reviewing submitted code based on a problem statement. Your role is to evaluate whether the provided code meets the requirements specified in the problem statement, including the correct order of elements. Please assess the submitted code in HTML, CSS, and JavaScript, considering functionality, correctness, adherence to coding standards, class and ID names, element order, and best practices.
+          role: 'user',
+          content: `You have been assigned the task of reviewing submitted code based on a problem statement. Your role is to evaluate whether the provided code meets the requirements specified in the problem statement, including the correct order of elements. Please assess the submitted code in HTML, CSS, and JavaScript, considering functionality, correctness, adherence to coding standards, class and ID names, element order, and best practices.
             Given the problem statement and the submitted code, determine whether the code satisfies the requirements and effectively solves the given problem.
             Please provide feedback on the code, highlighting any issues, missing elements, or areas for improvement. Avoid revealing the solution or mentioning that you are an AI language model.
             Keep the feedback short and direct.
-            If the user code is irrelevant or not valid, please provide the following output: "Oops! Not a valid code."
+            If the user code is irrelevant i.e, not a code and anything else, please provide the following output: "Oops! Not a valid code."
             Problem Statement:
             ${info}
             User Code:
             ${code}`
         }]
-    })
-
-    checkedCode = completion.data.choices[0].message.content;
-    console.log(checkedCode);
-    return checkedCode;
+      });
+  
+      const checkedCode = completion.data.choices[0].message.content;
+      console.log(checkedCode);
+      return checkedCode;
+    } catch (error) {
+      console.error(error);
+      throw new Error('An error occurred while checking the code.');
+    }
 }
+
 let value = 0;
 app.post('/quesValue', (req,res) => {
     value = req.body.value;
-    console.log(value);
     value--;
+    console.log(value)
     res.sendStatus(200);
 })
 
+app.post('/prevBtn', (req, res) => {
+    value = req.body.quesNo - 1;
+    res.redirect('/path');
+})
+
+app.post('/nextBtn', (req, res) => {
+    value = req.body.quesNo + 1;
+    res.redirect('/path');
+})
+
 app.get('/path', async (req, res) => {
+    // const headerValue = req.query.value;
+    console.log(value)
     const data = await project.find({});
-    res.render('code', { data, value: value });
+    res.render('code', { data, value: value});
 })
 
 app.get('/ques', async (req,res) => {
