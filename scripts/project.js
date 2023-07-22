@@ -1,27 +1,39 @@
 
-export function addCommentsInHtml(str, Sclass) {
-    str = removeCommentsinHtml(str);
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = `${str}`;
-    console.log(str)
-    console.log(tempDiv.innerHTML);
-    const selectedClass = tempDiv.querySelector(`.${Sclass}`);
-    if(selectedClass.innerHTML == '')
-    selectedClass.innerHTML = '\n<!-- Write your code here -->\n';
-    console.log(tempDiv.innerHTML);
-    return `<body>  ${tempDiv.innerHTML} </body>`;
+export function addCommentsInHtml(str, Sclass, playerSubmissionLen) {
+    if(Sclass && playerSubmissionLen == 0) {
+        str = removeCommentsinHtml(str);
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = `${str}`;
+        // console.log(Sclass)
+        // console.log(tempDiv.innerHTML);
+        const selectedClass = tempDiv.querySelector(`.${Sclass}`);
+        if(selectedClass)
+            selectedClass.innerHTML = '\n<!-- Write your code here -->\n';
+        // console.log(tempDiv.innerHTML);
+        return `<body>  ${tempDiv.innerHTML} </body>`;
+    }
+    else
+        return str;
 }
 
-export function addCommentsInCss(str) {
-    str = removeCommentsInCss(str);
-    str = ` ${str} \n\n/* Write your code here */ \n`;
-    return str;
+export function addCommentsInCss(str, playerSubmissionLen) {
+    if(playerSubmissionLen == 0) {
+        str = removeCommentsInCss(str);
+        str = ` ${str} \n\n/* Write your code here */ \n`;
+        return str;
+    }
+    else 
+        return str;
 }
 
-export function addCommentsInJs(str) {
-    str = removeCommentsInJs(str);
-    str = ` ${str} \n\n/* Write your code here */ \n`;
-    return str;
+export function addCommentsInJs(str, playerSubmissionLen) {
+    if(playerSubmissionLen == 0) {
+        str = removeCommentsInJs(str);
+        str = ` ${str} \n\n/* Write your code here */ \n`;
+        return str;
+    }
+    else
+        return str;
 }
 
 function removeCommentsinHtml(str) {
